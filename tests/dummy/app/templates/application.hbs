@@ -1,0 +1,23 @@
+{{#google-map lat=(average (map-by 'lat' locations)) lng=(average (map-by 'lng' locations)) as |map|}}
+  {{#each (filter-by 'active' true locations) as |location|}}
+    {{#map.marker lat=location.lat lng=location.lng onClick=(toggle-action 'isOpen' location) as |marker|}}
+      {{#marker.info-window open=location.isOpen}}
+        <strong>{{location.name}}</strong>
+      {{/marker.info-window}}
+    {{/map.marker}}
+  {{/each}}
+{{/google-map}}
+
+<ul>
+{{#each locations as |location|}}
+  <li>
+    {{one-way-input location.name update=(action (mut location.name))}}<br>
+    {{location.lat}}<br>
+    {{location.lng}}<br>
+    {{location.isOpen}}
+    {{one-way-checkbox location.active update=(action (mut location.active))}}
+  </li>
+{{/each}}
+</ul>
+
+<a {{action 'createMarker'}}>Create Marker</a>

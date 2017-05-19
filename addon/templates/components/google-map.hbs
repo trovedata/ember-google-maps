@@ -1,0 +1,8 @@
+<div class="map">
+</div>
+
+{{yield (hash
+  geojson-layer=(component "google-map/geojson-layer")
+  marker=(component "google-map/map-marker")
+  info-window=(component "google-map/info-window")
+)}}
